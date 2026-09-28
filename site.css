@@ -182,3 +182,20 @@ body { background: var(--pine); color: var(--linen); font: 400 18px/1.55 var(--t
   .reviews__list, .faq { grid-template-columns: 1fr; }
   .form { padding: 24px; }
 }
+
+/* Фишка: над фото поднимается тёплый пар. Слой между затемнением и текстом; три струи с разной скоростью,
+   каждая сдвигается ровно на свою плитку — цикл без шва. */
+@media (prefers-reduced-motion: no-preference) {
+  .hero::after {
+    content: ''; position: absolute; inset: 0 0 0 30%; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse 30% 40% at 30% 50%, rgba(255, 240, 214, .32), transparent 70%) 0 0 / 100% 60vh,
+      radial-gradient(ellipse 22% 34% at 72% 50%, rgba(255, 240, 214, .26), transparent 70%) 0 0 / 100% 45vh,
+      radial-gradient(ellipse 36% 28% at 52% 50%, rgba(255, 232, 200, .20), transparent 70%) 0 0 / 100% 75vh;
+    -webkit-mask-image: linear-gradient(to top, transparent, #000 35%, #000 60%, transparent 95%);
+    mask-image: linear-gradient(to top, transparent, #000 35%, #000 60%, transparent 95%);
+    animation: steam 16s linear infinite, sway 7s ease-in-out infinite alternate;
+  }
+  @keyframes steam { to { background-position: 0 -60vh, 0 -45vh, 0 -75vh; } }
+  @keyframes sway { from { translate: -2% 0; } to { translate: 2% 0; } }
+}
