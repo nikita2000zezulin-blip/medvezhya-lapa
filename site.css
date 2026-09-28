@@ -199,3 +199,10 @@ body { background: var(--pine); color: var(--linen); font: 400 18px/1.55 var(--t
   @keyframes steam { to { background-position: 0 -60vh, 0 -45vh, 0 -75vh; } }
   @keyframes sway { from { translate: -2% 0; } to { translate: 2% 0; } }
 }
+
+/* Фон секции: ИИ-текстура (Cloudflare Workers AI) под заливкой цвета сайта — декор, не фото бизнеса.
+   На компьютере картинка закреплена за окном — при прокрутке секция работает как окно (параллакс). */
+.ritual { background: linear-gradient(color-mix(in srgb, var(--pine) 82%, transparent), color-mix(in srgb, var(--pine) 92%, transparent)), url('img/bg-ritual.webp') center / cover var(--pine); }
+@media (hover: hover) and (pointer: fine) {
+  .ritual { background-attachment: scroll, fixed; }
+}
